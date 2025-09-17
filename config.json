@@ -1,0 +1,31 @@
+{
+  "geschosse": [
+    "UG",
+    "EG",
+    "OG",
+    "DG",
+    "AT",
+    "Unbekannt"
+  ],
+  "klassen": [
+    "Elektro / Verteilung / Kabel",
+    "Sanitär / Rohrleitungen",
+    "HLK / Klima / Lüftung",
+    "Fenster / Türen / Außenbauteile",
+    "Rohbau / Mauerwerk / Decke",
+    "Sicherheit / Brandschutz",
+    "Sonstiges / Umfeld",
+    "Grundstück"
+  ],
+  "ki_provider": "OpenAI (ChatGPT)",
+  "ki_model": "gpt-5",
+  "openai_api_key": "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",
+  "api_keys": {
+    "OpenAI (ChatGPT)": {
+      "gpt-5": "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"
+    },
+    "Microsoft Copilot": {}
+  },
+  "hover_color": "#00b0ca",
+  "hover_text_color": "#ffffff"
+}

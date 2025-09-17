@@ -17,14 +17,15 @@ from PIL import Image, ExifTags
 import streamlit as st
 
 # ========= BASISPFAD / LOGOS / DB / CSV =========
-BASE_DIR = r"C:\Users\owusu\Skripting\Bilder"
+BASE_DIR = os.path.join(os.path.dirname(__file__), "Bilder")
+
 LOGO_PATH_SIDEBAR = os.path.join(BASE_DIR, "EmchBergerLogo.png")
 LOGO_PATH_PROJEKTE = os.path.join(BASE_DIR, "apartment.png")
 LOGO_PATH_PROJEKTERSTELLEN = os.path.join(BASE_DIR, "engineering.png")
 LOGO_PATH_EXPORT = os.path.join(BASE_DIR, "move.png")
 LOGO_PATH_EINSTELLUNG = os.path.join(BASE_DIR, "settings.png")
 EBKPH_CSV_PATH = os.path.join(BASE_DIR, "eBKPH_Gesamttabelle.csv")
-DB_PATH = "projects.db"
+DB_PATH = os.path.join(os.path.dirname(__file__), "projects.db")
 
 # ========= DB: Tabelle sicherstellen =========
 def ensure_db():
