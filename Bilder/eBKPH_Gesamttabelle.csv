@@ -1,0 +1,353 @@
+Code;Bezeichnung
+A;Grundstueck
+A01;Grundstueck, Baurecht
+A01.01;Grundstueckserwerb
+A01.02;Baurechtserwerb
+A01.03;Bauwerkserwerb
+A01.04;Perimeterbeitrag
+A02;Nebenkosten zu Grundstueck, Baurecht
+A02.01;Handuenderungssteuer, Gewinnsteuer
+A02.02;Notariatskosten
+A02.03;Grundbuchgebuehr
+A02.04;Anwaltskosten, Gerichtskosten
+A02.05;Vermittlungsprovision
+A02.06;Abfindung, Servitut
+A02.07;Vermessung, Vermarkung
+B;Vorbereitung
+B01;Untersuchung, Aufnahme, Messung
+B01.01;Baugrunduntersuchung
+B01.02;Bestandsaufnahme
+B01.03;Umweltmessung
+B01.04;Überwachung
+B02;Baustelleneinrichtung
+B02.01;Baustellenerschliessung
+B02.02;Versorgung, Entsorgung
+B02.03;Arbeitsraum, Aufenthaltsraum
+B02.04;Hebe-, Verlade-, Transport-, Lagereinrichtung
+B02.05;Einrichtung fuer Materialaufbereitung
+B02.06;Witterungsbedingte Baumassnahme
+B02.07;Baustellenorganisation, Sicherheit
+B02.08;Schutzmassnahme fuer Umgebung
+B03;Provisorium
+B03.01;Provisorisches Rueckhaltesystem
+B03.02;Provisorische Werkleitung
+B03.03;Provisorisches Gebueude
+B03.04;Provisorische Verkehrsanlage
+B03.05;Provisorischer Ausbau, Ausstattung
+B04;Erschliessung durch Werkleitungen
+B04.01;Starkstromleitung
+B04.02;Schwachstromleitung
+B04.03;Fernwuermeleitung
+B04.04;Fernkuelteleitung
+B04.05;Wasserleitung
+B04.06;Schmutzwasserleitung
+B04.07;Regenwasserleitung
+B04.08;Gasleitung
+B05;Rodung, Rueckbau
+B05.01;Fuellung, Rodung, Umpflanzung
+B05.02;Nicht kontaminierter Rueckbau
+B05.03;Kontaminierter Rueckbau
+B06;Baugrube
+B06.01;Nicht kontaminierter Aushub
+B06.02;Kontaminierter Aushub
+B06.03;Bueschungssicherung
+B06.04;Baugrubenabschluss
+B06.05;Materialeinbau
+B06.06;Wasserhaltung
+B07;Baugrundverbesserung, Bauwerkssicherung
+B07.01;Verbesserung Baugrund
+B07.02;Pfuehlung
+B07.03;Unterfangung Bauwerk
+B07.04;Sicherung Bauwerk
+B08;Geruest
+B08.01;Fassadengeruest
+B08.02;Arbeitsgeruest
+B08.03;Notdach
+B08.04;Schutzgeruest
+B09;Anpassung angrenzendes Bauwerk
+B09.01;Bauliche Anpassung angrenzendes Bauwerk
+B09.02;Unterfangung, Sicherung angrenzendes Bauwerk
+B09.03;Verkehrsanlage ausserhalb Grundstueck
+C;Konstruktion Gebueude
+C01;Fundament, Bodenplatte
+C01.01;Unterbau Fundament, Bodenplatte
+C01.02;Fundament
+C01.03;Bodenplatte
+C01.04;Erdverbundene Treppe, Rampe
+C01.05;Erdverbundenes Podest
+C02;Wandkonstruktion
+C02.01;Aussenwandkonstruktion
+C02.02;Innenwandkonstruktion
+C03;Stuetzenkonstruktion
+C03.01;Aussenstuetze
+C03.02;Innenstuetze
+C04;Deckenkonstruktion, Dachkonstruktion
+C04.01;Geschossdecke
+C04.02;Innen liegende Treppe, Rampe
+C04.03;Innen liegendes Podest
+C04.04;Konstruktion Flachdach
+C04.05;Konstruktion geneigtes Dach
+C04.06;Aussen liegende Treppe, Rampe
+C04.07;Aussen liegendes Podest
+C04.08;Aussen liegende Konstruktion, Vordach
+C05;Erguenzende Leistung zu Konstruktion
+C05.01;Durchbruch, Schlitz zu Konstruktion
+C05.02;Maschinensockel, Einlage
+D;Technik Gebueude
+D01;Elektroanlage
+D01.01;Anlage Erzeugung Starkstrom
+D01.02;Transformierung Starkstrom
+D01.03;Speicherung Starkstrom
+D01.04;Installation Starkstrom
+D01.05;Verbraucher Starkstrom: Leuchten
+D01.06;Verbraucher Starkstrom: Elektrogeruete
+D01.07;Anlage Erzeugung Schwachstrom
+D01.08;Transformierung Schwachstrom
+D01.09;Speicherung Schwachstrom
+D01.10;Installation Schwachstrom
+D01.11;Verbraucher Schwachstrom
+D02;Gebueudeautomation
+D02.01;Managementebene
+D02.02;Automationsebene
+D02.03;Feldebene
+D02.04;Raumautomation
+D02.05;Automationsnetzwerk
+D02.06;Schaltgeruetekombination
+D02.07;Systemintegration
+D03;Sicherheitsanlage
+D03.01;Einbruchmeldeanlage, Überfallmeldeanlage
+D03.02;Zutrittskontrollanlage
+D03.03;Videoueberwachungsanlage
+D03.04;Schliessanlage
+D04;Technische Brandschutzanlage
+D04.01;Brandmeldeanlage
+D04.02;Gaswarnanlage
+D04.03;Nasslueschanlage
+D04.04;Trockenlueschanlage
+D04.05;Lueschgeruet
+D04.06;Rauch- und Wuermebehandlungsanlage
+D04.07;Elektroakustische Lautsprecheranlage
+D05;Wuermetechnische Anlage
+D05.01;Wuermequelle, -senke, Brennstofflager
+D05.02;Wuermeerzeugung
+D05.03;Wuermespeicherung
+D05.04;Wuermeverteilung
+D05.05;Wuermeabgabe
+D05.06;Wuermebezug: Investitionsanteil
+D06;Kueltetechnische Anlage
+D06.01;Kueltequelle, -senke, Brennstofflager
+D06.02;Kuelteerzeugung
+D06.03;Kueltespeicherung
+D06.04;Kuelteverteilung
+D06.05;Kuelteabgabe
+D06.06;Kueltebezug: Investitionsanteil
+D07;Lufttechnische Anlage
+D07.01;Aussenluftversorgung, Fortluftfuehrung
+D07.02;Luftaufbereitung
+D07.03;Luftwuermespeicherung
+D07.04;Luftverteilung
+D07.05;Luftabgabe
+D07.06;Luft: Investitionsanteil
+D08;Wassertechnische Anlage
+D08.01;Wasserversorgung
+D08.02;Wasserbehandlung
+D08.03;Wasserspeicher
+D08.04;Wasserverteilung
+D08.05;Wasser: Armatur, Apparat
+D08.06;Wasser: Installationselement
+D09;Abwassertechnische Anlage
+D09.01;Abwasserentsorgung
+D09.02;Abwasserbehandlung
+D09.03;Abwasserspeicher
+D09.04;Abwassersammlung
+D09.05;Abwasser: Armatur, Apparat
+D10;Gastechnische Anlage
+D10.01;Gasversorgung
+D10.02;Gasbehandlung
+D10.03;Gasspeicherung
+D10.04;Gasverteilung
+D10.05;Gas: Armatur, Apparat
+D11;Anlage fuer Spezialmedien
+D11.01;Spezialmedien: Versorgung, Entsorgung
+D11.02;Spezialmedien: Aufbereitung
+D11.03;Spezialmedien: Speicherung
+D11.04;Spezialmedien: Verteilung
+D11.05;Spezialmedien: Armatur, Apparat
+D12;Befuerderungsanlage
+D12.01;Personenaufzug
+D12.02;Lasten- und Serviceaufzug
+D12.03;Spezialaufzug
+D12.04;Fahrtreppe
+D12.05;Fahrsteig
+D12.06;Hebeeinrichtung, Verladestation
+E;Aeussere Wandbekleidung Gebueude
+E01;Aeussere Wandbekleidung unter Terrain
+E01.01;Wandabdichtung unter Terrain
+E01.02;Aussenwuermeduemmung unter Terrain
+E01.03;Schutzschicht unter Terrain
+E02;Aeussere Wandbekleidung ueber Terrain
+E02.01;Aeussere Beschichtung
+E02.02;Aussenwuermeduemmsystem
+E02.03;Fassadenbekleidung
+E02.04;Systemfassade
+E02.05;Fassadenbekleidung Untersicht
+E02.06;Aussen liegende Absturzsicherung
+E03;Element in Aussenwand
+E03.01;Fenster
+E03.02;Aussentuer
+E03.03;Aussentor
+E03.04;Sonnenschutz, Wetterschutz
+E03.05;Absturzsicherung
+F;Bedachung Gebueude
+F01;Dachhaut
+F01.01;Dachabdichtung unter Terrain
+F01.02;Bedachung Flachdach
+F01.03;Bedachung geneigtes Dach
+F01.04;Systemdach
+F02;Element zu Dach
+F02.01;Element zu Flachdach
+F02.02;Element zu geneigtem Dach
+F02.03;Schutzanlage zu Dach
+G;Ausbau Gebueude
+G01;Trennwand, Innentuer, Innentor
+G01.01;Fest stehende Trennwand
+G01.02;Bewegliche Trennwand
+G01.03;Schachtfront
+G01.04;Innenfenster
+G01.05;Innentuer
+G01.06;Innentor
+G02;Bodenbelag
+G02.01;Unterkonstruktion zu Bodenbelag
+G02.02;Bodenbelag
+G03;Wandbekleidung
+G03.01;Unterkonstruktion zu Wandbekleidung
+G03.02;Wandbekleidung
+G04;Deckenbekleidung
+G04.01;Unterkonstruktion zu Deckenbekleidung
+G04.02;Deckenbekleidung
+G05;Einbauten, Schutzeinrichtung zu Ausbau
+G05.01;Einbauschrank, Regal, Ablage
+G05.02;Einbaukueche
+G05.03;Innerer Fensterausbau
+G05.04;Innerer Abschluss
+G05.05;Absturz-, Anprallschutzeinrichtung
+G05.06;Sonderbauteil
+G05.07;Kleinbauteil, Schutzraumeinrichtung
+G06;Erguenzende Leistung zu Ausbau
+G06.01;Durchbruch, Schlitz zu Ausbau
+G06.02;Abschottung
+G06.03;Reinigung
+G06.04;Trocknung
+H;Nutzungsspezifische Anlage Gebueude
+H01;Produktionsanlage
+H01.01;Produktionsanlage: Versorgung, Entsorgung
+H01.02;Produktionsanlage: Aufbereitung
+H01.03;Produktionsanlage: Speicherung
+H01.04;Produktionsanlage: Verteilung
+H01.05;Produktionsanlage: Armatur, Apparat
+H02;Laboranlage
+H02.01;Laboranlage: Versorgung, Entsorgung
+H02.02;Laboranlage: Aufbereitung
+H02.03;Laboranlage: Speicherung
+H02.04;Laboranlage: Verteilung
+H02.05;Laboranlage: Armatur, Apparat
+H03;Grosskueche
+H03.01;Grosskueche: Versorgung, Entsorgung
+H03.02;Grosskueche: Aufbereitung
+H03.03;Grosskueche: Lagerung
+H03.04;Grosskueche: Verteilung
+H03.05;Grosskueche: Armatur, Apparat
+H04;Wuescherei-, Reinigungsanlage
+H04.01;Wuescherei-, Reinigungsanlage: Versorgung, Entsorgung
+H04.02;Wuescherei-, Reinigungsanlage: Aufbereitung
+H04.03;Wuescherei-, Reinigungsanlage: Speicherung
+H04.04;Wuescherei-, Reinigungsanlage: Verteilung
+H04.05;Wuescherei-, Reinigungsanlage: Armatur, Apparat
+H05;Anlage fuer Gesundheit
+H05.01;Geruet fuer Vitaldatenueberwachung
+H05.02;Einrichtung fuer Diagnostik
+H05.03;Geruet fuer Behandlung, Pflege
+H05.04;Medizinisches Kuelte-, Wuermegeruet
+H05.05;Mess-, Analysetechnik
+H05.06;Reinigung, Desinfektion, Sterilisation
+H05.07;Medizinische Einrichtung, Ausstattung
+H05.08;Medizinischer Beleuchtungskuerper
+H05.09;Medizinische Textilien
+H05.10;Medizinisches Kleininventar
+H05.11;Medizinisches Transportmittel
+H05.12;Medizinisches Betriebsmittel
+H06;Anlage fuer Bildung, Kultur
+H06.01;Bildung, Kultur: Versorgung, Entsorgung
+H06.02;Bildung, Kultur: Apparat
+H06.03;Bildung, Kultur: Steuerung
+H06.04;Bildung, Kultur: Einbauten
+H07;Sportanlage, Freizeitanlage
+H07.01;Sportanlage, Freizeitanlage: Versorgung, Entsorgung
+H07.02;Sportanlage, Freizeitanlage: Apparat
+H07.03;Sportanlage, Freizeitanlage: Steuerung
+H07.04;Sportanlage, Freizeitanlage: Einbauten
+H08;Anlage fuer Erholung
+H08.01;Erholungsanlage: Versorgung, Entsorgung
+H08.02;Erholungsanlage: Apparat
+H08.03;Erholungsanlage: Steuerung
+H08.04;Erholungsanlage: Einbauten
+H09;Weitere nutzungsspezifische Anlage
+H09.01;Nutzungsspezifische Anlage: Versorgung, Entsorgung
+H09.02;Nutzungsspezifische Anlage: Aufbereitung
+H09.03;Nutzungsspezifische Anlage: Speicherung, Lagerung
+H09.04;Nutzungsspezifische Anlage: Verteilung
+H09.05;Nutzungsspezifische Anlage: Armatur, Apparat
+H09.06;Parkieranlage
+H09.07;Materialtransportanlage
+H09.08;Kuehlzelle
+H09.09;Lagereinrichtung
+I;Umgebung Gebueude
+I01;Umgebungsgestaltung
+I01.01;Geluendeanpassung
+I01.02;Tief liegende Entwuesserung
+I02;Bauwerk in der Umgebung
+I02.01;Bueschungsverbau
+I02.02;Stuetzmauer
+I02.03;Frei stehende Wand
+I02.04;Treppe, Rampe
+I02.05;Kleinbauwerk
+I02.06;Unterirdisches Bauwerk
+I02.07;Absturz-, Anprallschutzeinrichtung fuer Umgebung
+I02.08;Einfriedung
+I03;Gruenflueche
+I03.01;Vegetationstragschicht
+I03.02;Saatflueche
+I03.03;Fluechenbepflanzung, Hecke
+I03.04;Vertikale Begruenung
+I03.05;Einzelbepflanzung
+I03.06;Einfassung, Abschluss Gruenflueche
+I03.07;Naturnahe Wasserflueche
+I03.08;Ingenieurbiologische Massnahme
+I03.09;Pflegemassnahme bis Übergabe
+I04;Hartflueche
+I04.01;Fundations-, Tragschicht
+I04.02;Einfassung, Abschluss Hartflueche
+I04.03;Deckschicht
+I04.04;Belag
+I04.05;Pfluesterung
+I04.06;Belag mit Abdichtung
+I05;Verkehrsanlage
+I05.01;Verkehrsflueche fuer Fussguenger
+I05.02;Verkehrsflueche fuer Fahrzeuge
+I05.03;Abstellflueche fuer Fahrzeuge
+I05.04;Signalisation, Markierung
+I06;Werkleitung in der Umgebung
+I06.01;Starkstromleitung Umgebung
+I06.02;Schwachstromleitung Umgebung
+I06.03;Fernwuermeleitung Umgebung
+I06.04;Fernkuelteleitung Umgebung
+I06.05;Wasserleitung Umgebung
+I06.06;Schmutzwasserleitung Umgebung
+I06.07;Regenwasserleitung Umgebung
+I06.08;Gasleitung Umgebung
+J;Ausstattung Gebueude
+J01;Allgemeine Ausstattung
+J01.01;Lose Ausstattung
+J01.02;Betriebsausstattung
+J01.03;Signalisation, Orientierung
+J01.04;Kunst am Bau
