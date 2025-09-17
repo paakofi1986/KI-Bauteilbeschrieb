@@ -1,0 +1,18 @@
+[theme]
+# Grundlayout
+base = "light"
+
+# Hauptakzentfarbe (Buttons, Slider, Checkbox etc.)
+primaryColor = "#31333f"
+
+# Hintergrund der Seiten
+backgroundColor = "#ffffff"
+
+# Hintergrund der Sidebar und von Karten
+secondaryBackgroundColor = "#f0f2f6"
+
+# Standard-Textfarbe
+textColor = "#000000"
+
+# Schriftart (optional)
+font = "sans serif"
