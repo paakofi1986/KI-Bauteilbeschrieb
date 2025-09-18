@@ -619,7 +619,8 @@ def load_ebkph_table(path: str) -> Optional[pd.DataFrame]:
 
 # ========= Filter =========
 def apply_filters_and_sort(df: pd.DataFrame) -> pd.DataFrame:
-    if df is None or df.empty: return df
+    if df is None or (hasattr(df, "empty") and df.empty):
+        return pd.DataFrame()  # ← immer ein leeres DF statt None
     f = st.session_state.filters
     view = df.copy()
     if f.get("geschoss"): view = view[view["Geschoss"].isin(f["geschoss"])]
@@ -1306,6 +1307,7 @@ def page_projekt(): #Seite Projekt erstellen
         ss.base_df = edited
     else:
         st.info("Noch keine Daten vorhanden. Lade Bilder hoch.")
+        return
 
     st.divider()
     st.subheader("Galerie")
