@@ -1,0 +1,24 @@
+{
+  "geschosse": [
+    "UG",
+    "EG",
+    "OG",
+    "DG",
+    "AT",
+    "Unbekannt"
+  ],
+  "klassen": [
+    "Elektro / Verteilung / Kabel",
+    "Sanitär / Rohrleitungen",
+    "HLK / Klima / Lüftung",
+    "Fenster / Türen / Außenbauteile",
+    "Rohbau / Mauerwerk / Decke",
+    "Sicherheit / Brandschutz",
+    "Sonstiges / Umfeld",
+    "Grundstück"
+  ],
+  "ki_provider": "OpenAI (ChatGPT)",
+  "ki_model": "gpt-5",
+  "hover_color": "#00b0ca",
+  "hover_text_color": "#ffffff"
+}
