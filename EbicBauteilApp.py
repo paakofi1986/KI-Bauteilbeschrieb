@@ -16,6 +16,24 @@ import pandas as pd
 from PIL import Image, ExifTags
 import streamlit as st
 
+from pathlib import Path
+
+# ---- Session-State Defaults ----
+def init_state():
+    defaults = {
+        "gallery_selected": [],      # oder None, je nach Logik
+        "gallery_items": [],
+        "page": "Projekt erstellen", # Standard-Seite
+        "prompt_text": "",
+        "ki_feedback": "",
+    }
+    for k, v in defaults.items():
+        if k not in st.session_state:
+            st.session_state[k] = v
+
+init_state()  # <-- direkt nach den Imports aufrufen
+
+
 # ========= BASISPFAD / LOGOS / DB / CSV =========
 BASE_DIR = os.path.join(os.path.dirname(__file__), "Bilder")
 
@@ -140,7 +158,7 @@ col_icon, col_text = st.columns([0.1, 0.9])
 with col_icon:
     logo_path = os.path.join(BASE_DIR, "AI-Logo.jpg")  # dein Logo
     if os.path.exists(logo_path):
-        st.image(logo_path, width=300,)  # oder use_container_width=True
+        st.image(logo_path, width=300,)  # oder width="stretch"
 
 with col_text:
     st.markdown(
@@ -242,29 +260,19 @@ def load_config() -> dict:
         "klassen": DEFAULT_KLASSEN,
         "ki_provider": "OpenAI (ChatGPT)",
         "ki_model": "gpt-4o",
-        # Neu: Key-Store pro Anbieter+Modell
-        "api_keys": {
-            "OpenAI (ChatGPT)": {},
-            "Microsoft Copilot": {},
-        },
         "hover_color": "#00b0ca",
-        "hover_text_color": "#ffffff", 
+        "hover_text_color": "#ffffff",
     }
     if os.path.exists(CONFIG_PATH):
         try:
             with open(CONFIG_PATH, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            # Backward-Compat: alten Einzel-Key übernehmen, falls vorhanden
-            legacy_openai = (data.get("openai_api_key") or "").strip()
-            api_keys = data.get("api_keys") or {}
-            if legacy_openai and "OpenAI (ChatGPT)" not in api_keys:
-                api_keys["OpenAI (ChatGPT)"] = {"default": legacy_openai}
+            # Nur harmlose Sachen übernehmen
             base.update({
                 "geschosse": data.get("geschosse", base["geschosse"]),
                 "klassen": data.get("klassen", base["klassen"]),
                 "ki_provider": data.get("ki_provider", base["ki_provider"]),
                 "ki_model": data.get("ki_model", base["ki_model"]),
-                "api_keys": api_keys or base["api_keys"],
                 "hover_color": data.get("hover_color", base["hover_color"]),
                 "hover_text_color": data.get("hover_text_color", base["hover_text_color"]),
             })
@@ -272,13 +280,15 @@ def load_config() -> dict:
             pass
     return base
 
-
 def save_config(cfg: dict):
     try:
+        # Sicherheitskopie ohne API-Keys
+        safe_cfg = {k: v for k, v in cfg.items() if k != "api_keys"}
         with open(CONFIG_PATH, "w", encoding="utf-8") as f:
-            json.dump(cfg, f, ensure_ascii=False, indent=2)
+            json.dump(safe_cfg, f, ensure_ascii=False, indent=2)
     except Exception:
         pass
+
 
 # ========= Session-Init =========
 if "page" not in st.session_state: st.session_state.page = "Projektspeicher"
@@ -319,7 +329,7 @@ def nav_item(label: str, icon_path: str, target_page: str):
         else:
             st.markdown('<div class="nav-icon-box">❔</div>', unsafe_allow_html=True)
     with c2:
-        if st.button(label, key=f"nav_{target_page}", use_container_width=True,
+        if st.button(label, key=f"nav_{target_page}", width="stretch",
                      type=("primary" if active else "secondary")):
             st.session_state.page = target_page
             st.rerun()
@@ -327,12 +337,25 @@ def nav_item(label: str, icon_path: str, target_page: str):
 
 # ======== KI: Custom-Prompt Helpers ========
 def _get_active_ki_settings():
+    # 1) Anbieter/Modell wie bisher aus der Config lesen
     cfg = st.session_state.config
     provider = cfg.get("ki_provider", "OpenAI (ChatGPT)")
     model = cfg.get("ki_model", "gpt-4o")
-    api_keys = (cfg.get("api_keys") or {}).get(provider, {})
-    api_key = api_keys.get(model) or api_keys.get("default") or ""
+
+    # 2) API-Key bevorzugt aus Secrets/Umgebung (sicher!)
+    secret_key = (st.secrets.get("OPENAI_API_KEY")
+                  or os.environ.get("OPENAI_API_KEY")
+                  or "")
+
+    if secret_key:
+        api_key = secret_key
+    else:
+        # 3) Fallback: alter Weg (nur falls noch irgendwo in config.json)
+        api_keys = (cfg.get("api_keys") or {}).get(provider, {})
+        api_key = api_keys.get(model) or api_keys.get("default") or ""
+
     return provider, model, api_key
+
 
 
 def _apply_custom_result_to_df(df: pd.DataFrame, results: dict):
@@ -471,7 +494,7 @@ with st.sidebar:
         )
 
         run_disabled = (not custom_prompt.strip()) or (not targets)
-        if st.button("Prompt ausführen", type="primary", use_container_width=True, disabled=run_disabled):
+        if st.button("Prompt ausführen", type="primary", width="stretch", disabled=run_disabled):
             if not api_key:
                 st.toast("Kein API-Key für den gewählten Anbieter/Modell gespeichert (Seite: Einstellung).", icon="⚠️")
             else:
@@ -617,12 +640,25 @@ def apply_filters_and_sort(df: pd.DataFrame) -> pd.DataFrame:
 
 # ======== KI: Custom-Prompt auf ausgewählte Zeilen anwenden ========
 def _get_active_ki_settings():
+    # 1) Anbieter/Modell wie bisher aus der Config lesen
     cfg = st.session_state.config
     provider = cfg.get("ki_provider", "OpenAI (ChatGPT)")
     model = cfg.get("ki_model", "gpt-4o")
-    api_keys = (cfg.get("api_keys") or {}).get(provider, {})
-    api_key = api_keys.get(model) or api_keys.get("default") or ""
+
+    # 2) API-Key bevorzugt aus Secrets/Umgebung (sicher!)
+    secret_key = (st.secrets.get("OPENAI_API_KEY")
+                  or os.environ.get("OPENAI_API_KEY")
+                  or "")
+
+    if secret_key:
+        api_key = secret_key
+    else:
+        # 3) Fallback: alter Weg (nur falls noch irgendwo in config.json)
+        api_keys = (cfg.get("api_keys") or {}).get(provider, {})
+        api_key = api_keys.get(model) or api_keys.get("default") or ""
+
     return provider, model, api_key
+
 
 def _apply_custom_result_to_df(df: pd.DataFrame, results: dict):
     """
@@ -956,7 +992,7 @@ def page_projektspeicher(): #Seite Projekt
     with col_icon:
         icon_path = os.path.join(BASE_DIR, "search.svg")
         if os.path.exists(icon_path):
-            st.image(icon_path, use_container_width=True)
+            st.image(icon_path, width="stretch")
     with col_input:
         q = st.text_input(
             "Suche (Name / Nummer / Adresse)",
@@ -986,7 +1022,7 @@ def page_projektspeicher(): #Seite Projekt
 
     edited = st.data_editor(
         df_view,
-        use_container_width=True,
+        width="stretch",
         height=500,
         column_config={
             "Auswählen": st.column_config.CheckboxColumn("Auswählen"),
@@ -1009,7 +1045,7 @@ def page_projektspeicher(): #Seite Projekt
     with c1:
         confirm = st.checkbox("Löschen bestätigen (nicht rückgängig)")
     with c2:
-        if st.button("🗑️ Ausgewählte löschen", type="primary", disabled=not (selected and confirm), use_container_width=True):
+        if st.button("🗑️ Ausgewählte löschen", type="primary", disabled=not (selected and confirm), width="stretch"):
             try:
                 for name in selected:
                     db_delete_project(name)
@@ -1071,7 +1107,7 @@ def page_projektspeicher(): #Seite Projekt
             data=pdf_bytes,
             file_name=os.path.basename(rp) or f"{first}_Bericht.pdf",
             mime="application/pdf",
-            use_container_width=True
+            width="stretch"
         )
     else:
         st.info("Kein gültiger Bericht für dieses Projekt vorhanden.")
@@ -1125,26 +1161,26 @@ def page_projekt(): #Seite Projekt erstellen
     c_new, c_discard, c_save = st.columns(3)
     with c_new:
         st.markdown("<div class='nowrap-btn'>", unsafe_allow_html=True)
-        if st.button("Neu erfassen", type="secondary", use_container_width=True):
+        if st.button("Neu erfassen", type="secondary", width="stretch"):
             reset_project_editor(); ss.loaded_project_name = ""; ss.load_selection = ""
             st.toast("Neuerfassung gestartet. Alle Felder & Bilder wurden geleert.", icon="✨"); st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='nowrap-btn'>", unsafe_allow_html=True)
-    run_ki = st.button("KI-Bauteilbeschrieb ausführen", use_container_width=True,
+    run_ki = st.button("KI-Bauteilbeschrieb ausführen", width="stretch",
                        help="Analysiert markierte Bilder und füllt die Zustandsanalyse.")
     st.markdown("</div>", unsafe_allow_html=True)
 
     with c_discard:
         st.markdown("<div class='nowrap-btn'>", unsafe_allow_html=True)
-        if st.button("Verwerfen", type="secondary", use_container_width=True):
+        if st.button("Verwerfen", type="secondary", width="stretch"):
             reset_project_editor(); ss.loaded_project_name = ""; ss.load_selection = ""
             st.toast("Alle Inhalte verworfen (Eingaben & Bilder gelöscht).", icon="🗑️"); st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
     with c_save:
         st.markdown("<div class='nowrap-btn'>", unsafe_allow_html=True)
-        if st.button("Speichern", type="primary", use_container_width=True, help="Speichert Projekt, Daten & Bilder in der Datenbank."):
+        if st.button("Speichern", type="primary", width="stretch", help="Speichert Projekt, Daten & Bilder in der Datenbank."):
             pname = (ss.meta.get("name") or "").strip()
             pnr = (ss.meta.get("nr") or "").strip()
             if not pname: st.toast("„Projektname“ ist ein Pflichtfeld.", icon="⚠️")
@@ -1251,7 +1287,7 @@ def page_projekt(): #Seite Projekt erstellen
         st.subheader("Zustandsanalyse (bearbeitbar)")
         edited = st.data_editor(
             ss.base_df,
-            use_container_width=True,
+            width="stretch",
             height=520,
             column_config={
                 "Miniatur": st.column_config.ImageColumn("Miniatur", width="small"),
@@ -1285,7 +1321,7 @@ def page_projekt(): #Seite Projekt erstellen
                 orig = r["Bild original"]
                 title = r["Bild umbenennen"].strip() if str(r["Bild umbenennen"]).strip() else orig
                 tbytes = ss.thumbs_map.get(orig)
-                if tbytes: st.image(tbytes, use_container_width=True)
+                if tbytes: st.image(tbytes, width="stretch")
                 st.caption(f"**{title}**")
                 if st.button("Details", key=f"det_{orig}"): ss.gallery_selected = orig
 
@@ -1293,7 +1329,7 @@ def page_projekt(): #Seite Projekt erstellen
     if sel:
         st.divider(); st.markdown("### Details")
         img_b = ss.images_map.get(sel)
-        if img_b: st.image(img_b, caption=sel, use_container_width=True)
+        if img_b: st.image(img_b, caption=sel, width="stretch")
         row = ss.base_df[ss.base_df["Bild original"] == sel]
         if not row.empty:
             r = row.iloc[0]
@@ -1312,7 +1348,7 @@ def page_projekt(): #Seite Projekt erstellen
     # ---------- Sofort-Vorschau ----------
     col_btn, _ = st.columns([0.35, 0.65])
     with col_btn:
-        if st.button("Sofort-Vorschau aus aktueller Tabelle erzeugen", use_container_width=True):
+        if st.button("Sofort-Vorschau aus aktueller Tabelle erzeugen", width="stretch"):
             try:
                 if ss.base_df is None or ss.base_df.empty:
                     st.warning("Keine Daten für die Vorschau.")
@@ -1331,7 +1367,7 @@ def page_projekt(): #Seite Projekt erstellen
             data=ss.last_preview_pdf,
             file_name=(ss.meta.get("name") or "Projekt") + "_Vorschau.pdf",
             mime="application/pdf",
-            use_container_width=True
+            width="stretch"
         )
     else:
         st.info("Noch keine Vorschau vorhanden (Sofort-Vorschau drücken).")
@@ -1353,7 +1389,7 @@ def page_export():
     with sc:
         icon_path = os.path.join(BASE_DIR, "search.svg")
         if os.path.exists(icon_path):
-            st.image(icon_path, use_container_width=True)
+            st.image(icon_path, width="stretch")
     with tc:
         query = st.text_input("Suche", value="", placeholder="Projektname, Projektnummer oder Adresse…",
                               label_visibility="collapsed")
@@ -1382,7 +1418,7 @@ def page_export():
 
     edited = st.data_editor(
         df_view,
-        use_container_width=True,
+        width="stretch",
         height=500,
         column_config={
             "Auswählen": st.column_config.CheckboxColumn("Auswählen"),
