@@ -1,0 +1,9 @@
+# Ignoriere Konfigurations- und Geheimdateien
+config.json
+*.env
+.env
+secrets*.json
+
+# Python typische Dateien
+__pycache__/
+*.pyc
