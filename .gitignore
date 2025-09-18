@@ -1,9 +1,10 @@
-# Ignoriere Konfigurations- und Geheimdateien
-config.json
+# Eigene ENV-Dateien (API-Keys etc.)
+KI-API.env
 *.env
-.env
-secrets*.json
 
-# Python typische Dateien
+# Config-Dateien, die keine Secrets enthalten sollen
+config.json
+
+# Python typische Cache-Dateien
 __pycache__/
 *.pyc
